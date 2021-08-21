@@ -41,16 +41,16 @@ runs:
           exit 1  
         fi
 
-        mv shellcheck-v${{inputs.version}}/shellcheck /usr/bin/
+        mv shellcheck-v${{inputs.version}}/shellcheck .
 
     - id: shellcheck-version-print
       name: Print Shellcheck version info
       shell: bash
       run: |
-        shellcheck --version
+        $GITHUB_ACTION_PATH/shellcheck --version
 
     - id: shellcheck-check
       name: Checks scripts with Shellcheck
       shell: bash
       run: |
-        bash -c 'shopt -s globstar; shellcheck --severity=${{inputs.severity}} ${{inputs.files}}'
+        bash -c 'shopt -s globstar; $GITHUB_ACTION_PATH/shellcheck --severity=${{inputs.severity}} ${{inputs.files}}'
