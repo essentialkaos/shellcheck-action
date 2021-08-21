@@ -1,0 +1,49 @@
+name: "Shellcheck"
+description: "Action for checking scripts with shellcheck"
+author: "ESSENTIALKAOS"
+
+branding:
+  icon: 'hash'
+  color: 'yellow'
+
+inputs:
+  files:
+    description: "Scripts for checking"
+    required: true
+
+  version:
+    description: "Version of shellcheck"
+    required: false
+    default: "0.7.2"
+
+runs:
+  using: "composite"
+  steps:
+    - id: shellcheck-install
+      name: Install Shellcheck 
+      shell: bash
+      run: |
+        if [[ "$RUNNER_OS" == "Linux" ]] ; then
+          wget https://github.com/koalaman/shellcheck/releases/download/v${{inputs.version}}/shellcheck-v${{inputs.version}}.linux.x86_64.tar.xz
+          tar xf shellcheck-v${{inputs.version}}.linux.x86_64.tar.xz
+        elif [[ "$RUNNER_OS" == "macOS" ]] ; then
+          wget https://github.com/koalaman/shellcheck/releases/download/v${{inputs.version}}/shellcheck-v${{inputs.version}}.darwin.x86_64.tar.xz
+          tar xf shellcheck-v${{inputs.version}}.darwin.x86_64.tar.xz
+        else
+          echo "$RUNNER_OS is not supported"
+          exit 1  
+        fi
+
+        mv shellcheck-v${{inputs.version}}/shellcheck /usr/bin/
+
+    - id: shellcheck-version-print
+      name: Print Shellcheck version info
+      shell: bash
+      run: |
+        shellcheck --version
+
+    - id: shellcheck-version-print
+      name: Print Shellcheck version info
+      shell: bash
+      run: |
+        bash -c 'shopt -s globstar; shellcheck ${{inputs.files}}'
