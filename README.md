@@ -22,6 +22,9 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      - name: Code checkout
+        uses: actions/checkout@v2
+
       - name: Check scripts with shellcheck
         uses: essentialkaos/shellcheck-action@v1
 
