@@ -28,7 +28,7 @@ jobs:
       - name: Code checkout
         uses: actions/checkout@v2
 
-      - name: Check scripts with shellcheck
+      - name: Check scripts with Shellcheck
         uses: essentialkaos/shellcheck-action@v1
         with:
           severity: error
