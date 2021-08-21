@@ -1,4 +1,4 @@
-name: "Shellcheck"
+name: "EK Shellcheck"
 description: "Action for checking scripts with shellcheck"
 author: "ESSENTIALKAOS"
 
