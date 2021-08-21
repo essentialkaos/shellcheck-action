@@ -64,15 +64,15 @@ runs:
       run : |
         declare -a options
 
-        if [[ -n "${{ inputs.format}}" ]] ; then
+        if [[ -n "${{inputs.format}}" ]] ; then
           options+=("--format=${{inputs.format}}")
         fi
 
-        if [[ -n "${{ inputs.severity}}" ]] ; then
+        if [[ -n "${{inputs.severity}}" ]] ; then
           options+=("--severity=${{inputs.severity}}")
         fi
 
-        if [[ -n "${{ inputs.shell}}" ]] ; then
+        if [[ -n "${{inputs.shell}}" ]] ; then
           options+=("--shell=${{inputs.shell}}")
         fi
 
