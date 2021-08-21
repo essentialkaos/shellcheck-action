@@ -55,7 +55,7 @@ runs:
       name: Print Shellcheck version info
       shell: bash
       run: |
-        echo "::group::Shellcheck version info"
+        echo "::group:: Print Shellcheck version…"
         $GITHUB_ACTION_PATH/shellcheck --version
         echo "::endgroup::"
 
@@ -63,5 +63,5 @@ runs:
       name: Checks scripts with Shellcheck
       shell: bash
       run: |
-        echo "Running shellcheck…"
+        echo "Running Shellcheck…"
         bash -c 'shopt -s globstar; $GITHUB_ACTION_PATH/shellcheck --severity=${{inputs.severity}} ${{inputs.files}}' && echo "Everything is OK!"

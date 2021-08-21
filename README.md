@@ -2,7 +2,7 @@
 
 <br/>
 
-Action for checking scripts with [shellcheck](https://github.com/koalaman/shellcheck).
+Action for checking scripts with [Shellcheck](https://github.com/koalaman/shellcheck).
 
 ### Usage
 
@@ -34,6 +34,17 @@ jobs:
           severity: error
           files: src/script1.sh src/script2.sh
 
+```
+
+You can disable specific checks through environment variables:
+
+```yml
+      - name: Check scripts with Shellcheck
+        uses: essentialkaos/shellcheck-action@v1
+        env:
+          SHELLCHECK_OPTS: -e SC1117 -e SC2034 -e SC2154
+        with:
+          files: src/script1.sh src/script2.sh
 ```
 
 ### License
