@@ -28,17 +28,19 @@ runs:
       name: Install Shellcheck 
       shell: bash
       run: |
+        echo "Downloading shellcheck…"
         sc_url="https://github.com/koalaman/shellcheck/releases/download"
 
         if [[ "$RUNNER_OS" == "Linux" ]] ; then
-          wget -O shellcheck.tar.xz ${sc_url}/v${{inputs.version}}/shellcheck-v${{inputs.version}}.linux.x86_64.tar.xz
+          wget -q -O shellcheck.tar.xz ${sc_url}/v${{inputs.version}}/shellcheck-v${{inputs.version}}.linux.x86_64.tar.xz
         elif [[ "$RUNNER_OS" == "macOS" ]] ; then
-          wget -O shellcheck.tar.xz ${sc_url}/v${{inputs.version}}/shellcheck-v${{inputs.version}}.darwin.x86_64.tar.xz
+          wget -q -O shellcheck.tar.xz ${sc_url}/v${{inputs.version}}/shellcheck-v${{inputs.version}}.darwin.x86_64.tar.xz
         else
           echo "$RUNNER_OS is not supported"
           exit 1  
         fi
 
+        echo "Unpacking shellcheck…"
         tar xfv shellcheck.tar.xz -C "$GITHUB_ACTION_PATH"
 
         mv "$GITHUB_ACTION_PATH/shellcheck-v${{inputs.version}}/shellcheck" \
@@ -54,4 +56,5 @@ runs:
       name: Checks scripts with Shellcheck
       shell: bash
       run: |
+        echo "Running shellcheck…"
         bash -c 'shopt -s globstar; $GITHUB_ACTION_PATH/shellcheck --severity=${{inputs.severity}} ${{inputs.files}}'
