@@ -32,9 +32,9 @@ runs:
         sc_url="https://github.com/koalaman/shellcheck/releases/download"
 
         if [[ "$RUNNER_OS" == "Linux" ]] ; then
-          wget -O shellcheck.tar.xz ${sc_url}/v${{inputs.version}}/shellcheck-v${{inputs.version}}.linux.x86_64.tar.xz 2>&1
+          wget -O shellcheck.tar.xz "${sc_url}/v${{inputs.version}}/shellcheck-v${{inputs.version}}.linux.x86_64.tar.xz" 2>&1
         elif [[ "$RUNNER_OS" == "macOS" ]] ; then
-          wget -O shellcheck.tar.xz ${sc_url}/v${{inputs.version}}/shellcheck-v${{inputs.version}}.darwin.x86_64.tar.xz 2>&1
+          wget -O shellcheck.tar.xz "${sc_url}/v${{inputs.version}}/shellcheck-v${{inputs.version}}.darwin.x86_64.tar.xz" 2>&1
         else
           echo "::endgroup::"
           echo "$RUNNER_OS is not supported"
@@ -55,7 +55,7 @@ runs:
       name: Print Shellcheck version info
       shell: bash
       run: |
-        echo "::group:: Print Shellcheck version…"
+        echo "::group::Print Shellcheck version…"
         $GITHUB_ACTION_PATH/shellcheck --version
         echo "::endgroup::"
 
