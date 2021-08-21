@@ -28,7 +28,7 @@ runs:
       name: Install Shellcheck 
       shell: bash
       run: |
-        echo "Downloading shellcheck…"
+        echo "::group::Downloading Shellcheck…"
         sc_url="https://github.com/koalaman/shellcheck/releases/download"
 
         if [[ "$RUNNER_OS" == "Linux" ]] ; then
@@ -40,21 +40,27 @@ runs:
           exit 1  
         fi
 
-        echo "Unpacking shellcheck…"
-        tar xfv shellcheck.tar.xz -C "$GITHUB_ACTION_PATH"
+        echo "::endgroup::"
+        echo "::group::Unpacking Shellcheck…"
+
+        tar xf shellcheck.tar.xz -C "$GITHUB_ACTION_PATH"
 
         mv "$GITHUB_ACTION_PATH/shellcheck-v${{inputs.version}}/shellcheck" \
            "$GITHUB_ACTION_PATH"
+
+        echo "::endgroup::"
 
     - id: shellcheck-version-print
       name: Print Shellcheck version info
       shell: bash
       run: |
+        echo "::group::Shellcheck version info"
         $GITHUB_ACTION_PATH/shellcheck --version
+        echo "::endgroup::"
 
     - id: shellcheck-check
       name: Checks scripts with Shellcheck
       shell: bash
       run: |
         echo "Running shellcheck…"
-        bash -c 'shopt -s globstar; $GITHUB_ACTION_PATH/shellcheck --severity=${{inputs.severity}} ${{inputs.files}}'
+        bash -c 'shopt -s globstar; $GITHUB_ACTION_PATH/shellcheck --severity=${{inputs.severity}} ${{inputs.files}}' && echo "Everything is OK!"
