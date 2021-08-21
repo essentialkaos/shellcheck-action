@@ -1,5 +1,5 @@
 name: "EK Shellcheck"
-description: "Action for checking scripts with shellcheck"
+description: "Action for checking scripts with Shellcheck"
 author: "ESSENTIALKAOS"
 
 branding:
@@ -12,7 +12,7 @@ inputs:
     required: true
 
   version:
-    description: "Version of shellcheck"
+    description: "Version of Shellcheck"
     required: false
     default: "0.7.2"
 
@@ -20,6 +20,11 @@ inputs:
     description: "Minimum severity of errors to consider"
     required: false
     default: "style"
+
+  format:
+    description: "The output format for the results (checkstyle/diff/gcc/json/json1/quiet/tty)"
+    required: false
+    default: "tty"
 
 runs:
   using: "composite"
@@ -64,4 +69,4 @@ runs:
       shell: bash
       run: |
         echo "Running Shellcheck…"
-        bash -c 'shopt -s globstar; $GITHUB_ACTION_PATH/shellcheck --severity=${{inputs.severity}} ${{inputs.files}}' && echo "Everything is OK!"
+        bash -c 'shopt -s globstar; $GITHUB_ACTION_PATH/shellcheck --format=${{inputs.format}} --severity=${{inputs.severity}} ${{inputs.files}}' && echo "Everything is OK!"

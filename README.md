@@ -32,6 +32,7 @@ jobs:
         uses: essentialkaos/shellcheck-action@v1
         with:
           severity: error
+          format: gcc
           files: src/script1.sh src/script2.sh
 
 ```
