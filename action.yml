@@ -16,6 +16,11 @@ inputs:
     required: false
     default: "0.7.2"
 
+  severity:
+    description: "Minimum severity of errors to consider"
+    required: false
+    default: "style"
+
 runs:
   using: "composite"
   steps:
@@ -48,4 +53,4 @@ runs:
       name: Print Shellcheck version info
       shell: bash
       run: |
-        bash -c 'shopt -s globstar; shellcheck ${{inputs.files}}'
+        bash -c 'shopt -s globstar; shellcheck --severity=${{inputs.severity}} ${{inputs.files}}'
