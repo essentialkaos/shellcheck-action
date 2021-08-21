@@ -19,12 +19,14 @@ inputs:
   severity:
     description: "Minimum severity of errors to consider"
     required: false
-    default: "style"
 
   format:
     description: "The output format for the results (checkstyle/diff/gcc/json/json1/quiet/tty)"
     required: false
-    default: "tty"
+
+  shell:
+    description: "Specify dialect (sh, bash, dash, ksh)"
+    required: false
 
 runs:
   using: "composite"
@@ -70,8 +72,16 @@ runs:
           options+=("--severity=${{inputs.severity}}")
         fi
 
+        if [[ -n "${{ inputs.shell}}" ]] ; then
+          options+=("--shell=${{inputs.shell}}")
+        fi
+
         echo "::group::Shellcheck configuration…"
-        echo "Options: ${options[@]}"
+        if [[ ${#options[@]} -eq 0 ]] ; then
+          echo "Options: -no-set-"
+        else
+          echo "Options: ${options[@]}"
+        fi
         echo "::endgroup::"
 
         echo "::set-output name=options::${options[@]}"

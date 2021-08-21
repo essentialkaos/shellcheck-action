@@ -33,6 +33,7 @@ jobs:
         with:
           severity: error
           format: gcc
+          shell: dash
           files: src/script1.sh src/script2.sh
 
 ```
