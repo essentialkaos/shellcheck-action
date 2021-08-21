@@ -41,7 +41,8 @@ runs:
           exit 1  
         fi
 
-        mv shellcheck-v${{inputs.version}}/shellcheck .
+        mv "$GITHUB_ACTION_PATH/shellcheck-v${{inputs.version}}/shellcheck" \
+           "$GITHUB_ACTION_PATH/"
 
     - id: shellcheck-version-print
       name: Print Shellcheck version info
