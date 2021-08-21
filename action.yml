@@ -56,14 +56,6 @@ runs:
 
         echo "::endgroup::"
 
-    - id: shellcheck-version-print
-      name: Print Shellcheck version info
-      shell: bash
-      run: |
-        echo "::group::Print Shellcheck version…"
-        $GITHUB_ACTION_PATH/shellcheck --version
-        echo "::endgroup::"
-
     - id: shellcheck-set-options
       name: Set Shellcheck options
       shell: bash
@@ -78,7 +70,19 @@ runs:
           options+=("--severity=${{inputs.severity}}")
         fi
 
+        echo "::group::Shellcheck configuration…"
+        echo "Options: ${options[@]}"
+        echo "::endgroup::"
+
         echo "::set-output name=options::${options[@]}"
+
+    - id: shellcheck-version-print
+      name: Print Shellcheck version info
+      shell: bash
+      run: |
+        echo "::group::Print Shellcheck version…"
+        $GITHUB_ACTION_PATH/shellcheck --version
+        echo "::endgroup::"
 
     - id: shellcheck-check
       name: Checks scripts with Shellcheck
