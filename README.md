@@ -14,7 +14,10 @@ Add next code to it:
 name: CI
 
 on:
-  create
+  push:
+    branches: [master, develop]
+  pull_request:
+    branches: [master]
 
 jobs:
   Shellcheck:
