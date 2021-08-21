@@ -39,10 +39,10 @@ runs:
           exit 1  
         fi
 
-        tar xfv shellcheck.tar.xz
+        tar xfv shellcheck.tar.xz -C "$GITHUB_ACTION_PATH"
 
         mv "$GITHUB_ACTION_PATH/shellcheck-v${{inputs.version}}/shellcheck" \
-           "$GITHUB_ACTION_PATH/"
+           "$GITHUB_ACTION_PATH"
 
     - id: shellcheck-version-print
       name: Print Shellcheck version info
