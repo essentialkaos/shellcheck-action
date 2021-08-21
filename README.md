@@ -27,6 +27,9 @@ jobs:
 
       - name: Check scripts with shellcheck
         uses: essentialkaos/shellcheck-action@v1
+        with:
+          severity: error
+          files: src/script1.sh src/script2.sh
 
 ```
 
