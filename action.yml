@@ -49,8 +49,8 @@ runs:
       run: |
         shellcheck --version
 
-    - id: shellcheck-version-print
-      name: Print Shellcheck version info
+    - id: shellcheck-check
+      name: Checks scripts with Shellcheck
       shell: bash
       run: |
         bash -c 'shopt -s globstar; shellcheck --severity=${{inputs.severity}} ${{inputs.files}}'
