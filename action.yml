@@ -4,7 +4,7 @@ author: "ESSENTIALKAOS"
 
 branding:
   icon: 'hash'
-  color: 'yellow'
+  color: 'white'
 
 inputs:
   files:
@@ -99,4 +99,4 @@ runs:
       shell: bash
       run: |
         echo "Running Shellcheck…"
-        bash -c 'shopt -s globstar; $GITHUB_ACTION_PATH/shellcheck ${{ steps.shellcheck-set-options.outputs.options }} ${{inputs.files}}' && echo "Everything is OK!"
+        bash -c 'shopt -s globstar; $GITHUB_ACTION_PATH/shellcheck ${{steps.shellcheck-set-options.outputs.options}} ${{inputs.files}}' && echo "Everything is OK!"
