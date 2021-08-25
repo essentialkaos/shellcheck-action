@@ -31,10 +31,10 @@ jobs:
       - name: Check scripts with Shellcheck
         uses: essentialkaos/shellcheck-action@v1
         with:
+          files: src/script1.sh src/script2.sh
           severity: error
           format: gcc
           shell: dash
-          files: src/script1.sh src/script2.sh
 
 ```
 
