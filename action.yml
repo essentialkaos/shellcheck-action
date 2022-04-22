@@ -8,7 +8,7 @@ branding:
 
 inputs:
   files:
-    description: "Scripts for checking"
+    description: "List of scripts for checking"
     required: true
 
   version:
@@ -25,17 +25,27 @@ inputs:
     required: false
 
   shell:
-    description: "Specify dialect (sh, bash, dash, ksh)"
+    description: "Script dialect (sh, bash, dash, ksh)"
     required: false
 
 runs:
   using: "composite"
   steps:
+    - id: shellcheck-bin-cache
+      name: Cache Shellcheck binaries
+      uses: actions/cache@v3
+      with:
+        path: ~/.cache/shellcheck
+        key: ${{runner.os}}-shellcheck-v${{inputs.version}}
+
     - id: shellcheck-install
-      name: Install Shellcheck 
+      name: Install Shellcheck
+      if: steps.shellcheck-bin-cache.outputs.cache-hit != 'true'
       shell: bash
       run: |
         echo "::group::Downloading Shellcheck…"
+
+        mkdir -p ~/.cache
         sc_url="https://github.com/koalaman/shellcheck/releases/download"
 
         if [[ "$RUNNER_OS" == "Linux" ]] ; then
@@ -45,7 +55,7 @@ runs:
         else
           echo "::endgroup::"
           echo "$RUNNER_OS is not supported"
-          exit 1  
+          exit 1
         fi
 
         echo "::endgroup::"
@@ -54,7 +64,7 @@ runs:
         tar xfv shellcheck.tar.xz -C "$GITHUB_ACTION_PATH"
 
         mv "$GITHUB_ACTION_PATH/shellcheck-v${{inputs.version}}/shellcheck" \
-           "$GITHUB_ACTION_PATH"
+           ~/.cache/shellcheck
 
         echo "::endgroup::"
 
@@ -91,7 +101,7 @@ runs:
       shell: bash
       run: |
         echo "::group::Print Shellcheck version…"
-        $GITHUB_ACTION_PATH/shellcheck --version
+        ~/.cache/shellcheck --version
         echo "::endgroup::"
 
     - id: shellcheck-check
@@ -99,4 +109,4 @@ runs:
       shell: bash
       run: |
         echo "Running Shellcheck…"
-        bash -c 'shopt -s globstar; $GITHUB_ACTION_PATH/shellcheck ${{steps.shellcheck-set-options.outputs.options}} ${{inputs.files}}' && echo "Everything is OK!"
+        bash -c 'shopt -s globstar; ~/.cache/shellcheck ${{steps.shellcheck-set-options.outputs.options}} ${{inputs.files}}' && echo "Everything is OK!"

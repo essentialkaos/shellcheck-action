@@ -49,6 +49,16 @@ You can disable specific checks through environment variables:
           files: src/script1.sh src/script2.sh
 ```
 
+### Options
+
+| Option | Description | Value |
+|--------|-------------|--------|
+| `files` | List of scripts for checking | _Paths_ |
+| `version` | Version of Shellcheck | _Version in semver notation_ |
+| `severity` | Minimum severity of errors to consider | _Severity_ |
+| `format` | The output format for the results | `checkstyle`<br/>`diff`<br/>`gcc`<br/>`json`<br/>`json1`<br/>`quiet`<br/>`tty` |
+| `shell` | Script dialect | `sh`<br/>`bash`<br/>`dash`<br/>`ksh` |
+
 ### License
 
 [Apache License, Version 2.0](https://www.apache.org/licenses/LICENSE-2.0)
