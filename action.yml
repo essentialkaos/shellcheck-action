@@ -32,11 +32,11 @@ runs:
   using: "composite"
   steps:
     - id: shellcheck-bin-cache
-      name: Cache Shellcheck binaries
+      name: Cache Shellcheck binary
       uses: actions/cache@v3
       with:
         path: ~/.cache/shellcheck
-        key: ${{runner.os}}-shellcheck-v${{inputs.version}}
+        key: ${{runner.os}}-go-shellcheck-action-v${{inputs.version}}
 
     - id: shellcheck-install
       name: Install Shellcheck
