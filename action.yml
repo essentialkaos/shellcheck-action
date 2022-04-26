@@ -36,7 +36,7 @@ runs:
       uses: actions/cache@v3
       with:
         path: ~/.cache/shellcheck
-        key: ${{runner.os}}-go-shellcheck-action-v${{inputs.version}}
+        key: ${{runner.os}}-ek-shellcheck-action-v${{inputs.version}}
 
     - id: shellcheck-install
       name: Install Shellcheck
