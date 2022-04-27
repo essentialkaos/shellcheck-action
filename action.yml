@@ -116,5 +116,5 @@ runs:
       run: |
         # [shellcheck-check]
 
-        echo "Running Shellcheck…"
-        bash -c 'shopt -s globstar; ~/.cache/shellcheck ${{steps.shellcheck-set-options.outputs.options}} ${{inputs.files}}' && echo "Everything is OK!"
+        echo -e "\e[34mRunning Shellcheck…\e[0m"
+        bash -c 'shopt -s globstar; ~/.cache/shellcheck ${{steps.shellcheck-set-options.outputs.options}} ${{inputs.files}}' && echo -e "\e[32mEverything is OK!\e[0m"
