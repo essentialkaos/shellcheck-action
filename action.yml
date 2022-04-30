@@ -45,7 +45,7 @@ runs:
       run: |
         # [shellcheck-install]
 
-        echo -e "::group::\e[34mDownloading Shellcheck…\e[0m"
+        echo -e "::group::\033[34mDownloading Shellcheck…\033[0m"
 
         mkdir -p ~/.cache
         sc_url="https://github.com/koalaman/shellcheck/releases/download"
@@ -61,7 +61,7 @@ runs:
         fi
 
         echo "::endgroup::"
-        echo -e "::group::\e[34mUnpacking Shellcheck…\e[0m"
+        echo -e "::group::\033[34mUnpacking Shellcheck…\033[0m"
 
         tar xfv shellcheck.tar.xz -C "$GITHUB_ACTION_PATH"
 
@@ -90,7 +90,7 @@ runs:
           options+=("--shell=${{inputs.shell}}")
         fi
 
-        echo -e "::group::\e[34mShellcheck configuration…\e[0m"
+        echo -e "::group::\033[34mShellcheck configuration…\033[0m"
         if [[ ${#options[@]} -eq 0 ]] ; then
           echo "Options: -no-set-"
         else
@@ -106,7 +106,7 @@ runs:
       run: |
         # [shellcheck-version-print]
 
-        echo -e "::group::\e[34mPrint Shellcheck version…\e[0m"
+        echo -e "::group::\033[34mPrint Shellcheck version…\033[0m"
         ~/.cache/shellcheck --version
         echo "::endgroup::"
 
@@ -116,5 +116,5 @@ runs:
       run: |
         # [shellcheck-check]
 
-        echo -e "\e[34mRunning Shellcheck…\e[0m"
-        bash -c 'shopt -s globstar; ~/.cache/shellcheck ${{steps.shellcheck-set-options.outputs.options}} ${{inputs.files}}' && echo -e "\e[32mEverything is OK!\e[0m"
+        echo -e "\033[34mRunning Shellcheck…\033[0m"
+        bash -c 'shopt -s globstar; ~/.cache/shellcheck ${{steps.shellcheck-set-options.outputs.options}} ${{inputs.files}}' && echo -e "\033[32mEverything is OK!\033[0m"
