@@ -98,7 +98,7 @@ runs:
         fi
         echo "::endgroup::"
 
-        echo "::set-output name=options::${options[@]}"
+        echo "options=${options[@]}" >> $GITHUB_OUTPUT
 
     - id: shellcheck-version-print
       name: Print Shellcheck version info
