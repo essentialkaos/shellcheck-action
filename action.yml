@@ -33,7 +33,7 @@ runs:
   steps:
     - id: shellcheck-bin-cache
       name: Cache Shellcheck binary
-      uses: actions/cache@v3
+      uses: actions/cache@v4
       with:
         path: ~/.cache/shellcheck
         key: ${{runner.os}}-ek-shellcheck-action-v${{inputs.version}}
