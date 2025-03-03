@@ -26,7 +26,7 @@ jobs:
 
     steps:
       - name: Code checkout
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       - name: Check scripts with Shellcheck
         uses: essentialkaos/shellcheck-action@v1
